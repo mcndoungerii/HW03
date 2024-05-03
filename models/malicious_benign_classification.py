@@ -19,11 +19,6 @@ y = data['Type']  # Target variable
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Train decision tree classifiers with different hyperparameters
-max_depths = [None, 5, 10]
-min_samples_splits = [2, 5, 10]
-min_samples_leafs = [1, 2, 4]
-max_leaf_nodes = [None, 5, 10]
-max_features = [None, 'sqrt', 'log2']
 best_accuracy = -1
 best_hyperparameters = {}
 

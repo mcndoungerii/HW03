@@ -1,7 +1,16 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.model_selection import cross_val_score
 from sklearn.tree import DecisionTreeClassifier
+
+# Train decision tree classifiers with different hyperparameters
+max_depths = [None, 5, 10]
+min_samples_splits = [2, 5, 10]
+min_samples_leafs = [1, 2, 4]
+max_leaf_nodes = [None, 5, 10]
+max_features = [None, 'sqrt', 'log2']
+best_accuracy = -1
+best_hyperparameters = {}
 
 def load_malicious_benign_data():
 
