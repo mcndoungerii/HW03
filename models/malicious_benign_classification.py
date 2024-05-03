@@ -10,10 +10,8 @@ data = load_malicious_benign_data()
 
 # Split features and target variable
 X = data.drop(columns=['SERVER', 'WHOIS_COUNTRY', 'WHOIS_STATEPRO', 'NUMBER_SPECIAL_CHARACTERS', 'CHARSET',
-                       'TCP_CONVERSATION_EXCHANGE',
-                       'DIST_REMOTE_TCP_PORT', 'REMOTE_IPS', 'APP_BYTES', 'SOURCE_APP_PACKETS', 'REMOTE_APP_PACKETS',
-                       'APP_PACKETS',
-                       'WHOIS_REGDATE', 'WHOIS_UPDATED_DATE'])  # Features
+                       'TCP_CONVERSATION_EXCHANGE','DIST_REMOTE_TCP_PORT', 'REMOTE_IPS', 'APP_BYTES',
+                       'SOURCE_APP_PACKETS', 'REMOTE_APP_PACKETS','APP_PACKETS','WHOIS_REGDATE', 'WHOIS_UPDATED_DATE'])  # Features
 y = data['Type']  # Target variable
 
 # Split the data into training and testing sets
@@ -52,7 +50,6 @@ test_accuracy = accuracy_score(y_test, y_pred)
 print("Best Model Hyperparameters:", best_hyperparameters)
 print("Test Accuracy:", test_accuracy)
 print("Train Accuracy:", best_accuracy)
-
 
 # Predictions
 train_predictions = best_clf.predict(X_train)

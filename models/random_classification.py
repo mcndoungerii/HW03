@@ -12,8 +12,6 @@ X, y = data["X"], data["Y"]
 
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_state=42)
 
-# Define a function to train and evaluate decision tree classifiers with different hyperparameters
-
 # Test the function with different hyperparameters
 best_accuracy = -1
 best_hyperparameters = {}
@@ -45,6 +43,7 @@ y_pred = best_clf.predict(X_test)
 test_accuracy = accuracy_score(y_test, y_pred)
 print("Best Model Hyperparameters:", best_hyperparameters)
 print("Test Accuracy:", test_accuracy)
+print("Train Accuracy:", best_accuracy)
 
 # Predictions
 train_predictions = best_clf.predict(X_train)
