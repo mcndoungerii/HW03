@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn.model_selection import cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 import numpy as np
+from pandas import DataFrame
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, precision_recall_curve, roc_curve, roc_auc_score
 import matplotlib.pyplot as plt
 
 # Train decision tree classifiers with different hyperparameters
@@ -110,6 +112,68 @@ def plot_graph_(X_train,y_train, best_hyperparameters,feature1,feature2):
     plt.ylabel(feature2)
     plt.title('Decision Boundary Visualization')
     plt.legend()
+    plt.show()
+
+
+def plot_graph_on_quality_metrics(y_train:DataFrame, y_test:DataFrame, train_predictions:DataFrame, test_predictions:DataFrame,):
+    '''
+    Visualize the quality metrics of the Decision Tree (i.e., Confusion Matrix, Accuracy and F1 Score)
+    This code calculates and displays various evaluation metrics for both the training and test sets.
+    :param y_train:
+    :param y_test:
+    :param train_predictions:
+    :param test_predictions:
+    :return:
+    '''
+    # Confusion Matrix
+    conf_matrix_train = confusion_matrix(y_train, train_predictions)
+    conf_matrix_test = confusion_matrix(y_test, test_predictions)
+    # Precision
+    precision_train = precision_score(y_train, train_predictions)
+    precision_test = precision_score(y_test, test_predictions)
+    # Recall
+    recall_train = recall_score(y_train, train_predictions)
+    recall_test = recall_score(y_test, test_predictions)
+    # F1 Score
+    f1_train = f1_score(y_train, train_predictions)
+    f1_test = f1_score(y_test, test_predictions)
+    # Precision-Recall Curve
+    precision_train_curve, recall_train_curve, _ = precision_recall_curve(y_train, train_predictions)
+    precision_test_curve, recall_test_curve, _ = precision_recall_curve(y_test, test_predictions)
+    # ROC Curve and AUC
+    fpr_train, tpr_train, _ = roc_curve(y_train, train_predictions)
+    fpr_test, tpr_test, _ = roc_curve(y_test, test_predictions)
+    auc_train = roc_auc_score(y_train, train_predictions)
+    auc_test = roc_auc_score(y_test, test_predictions)
+    # Display metrics
+    print("Confusion Matrix - Train:\n", conf_matrix_train)
+    print("Confusion Matrix - Test:\n", conf_matrix_test)
+    print("Precision - Train:", precision_train)
+    print("Precision - Test:", precision_test)
+    print("Recall - Train:", recall_train)
+    print("Recall - Test:", recall_test)
+    print("F1 Score - Train:", f1_train)
+    print("F1 Score - Test:", f1_test)
+    print("AUC - Train:", auc_train)
+    print("AUC - Test:", auc_test)
+    # Plot Precision-Recall Curve
+    plt.figure()
+    plt.plot(recall_train_curve, precision_train_curve, label='Train PR curve')
+    plt.plot(recall_test_curve, precision_test_curve, label='Test PR curve')
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.title('Precision-Recall Curve')
+    plt.legend()
+    plt.show()
+    # Plot ROC Curve
+    plt.figure()
+    plt.plot(fpr_train, tpr_train, label='Train ROC curve (area = %0.2f)' % auc_train)
+    plt.plot(fpr_test, tpr_test, label='Test ROC curve (area = %0.2f)' % auc_test)
+    plt.plot([0, 1], [0, 1], 'k--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('ROC Curve')
+    plt.legend(loc="lower right")
     plt.show()
 
 

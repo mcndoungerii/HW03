@@ -1,10 +1,9 @@
-import pandas as pd
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 
 from utility import (load_malicious_benign_data,evaluate_decision_tree,max_depths, max_features_list,
-                     min_samples_splits,min_samples_leafs,max_leaf_nodes_list,plot_graph_)
+                     min_samples_splits,min_samples_leafs,max_leaf_nodes_list,plot_graph_,plot_graph_on_quality_metrics)
 
 data = load_malicious_benign_data()
 
@@ -58,3 +57,5 @@ print(f"Train Predictions: {train_predictions} \nTest Predictions: {test_predict
 
 
 plot_graph_(X_train, y_train, best_hyperparameters, "URL_LENGTH", "Type")
+print("quality metrics:")
+plot_graph_on_quality_metrics(y_train,y_test,train_predictions,test_predictions)
