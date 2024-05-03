@@ -4,7 +4,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 
 from utility import (load_random_generator,evaluate_decision_tree,max_depths, max_features_list,
-                     min_samples_splits,min_samples_leafs,max_leaf_nodes_list)
+                     min_samples_splits,min_samples_leafs,max_leaf_nodes_list,plot_decision_boundaries)
 
 data = load_random_generator()
 
@@ -49,3 +49,6 @@ print("Train Accuracy:", best_accuracy)
 train_predictions = best_clf.predict(X_train)
 test_predictions = best_clf.predict(X_test)
 print(f"Train Predictions: {train_predictions} \nTest Predictions: {test_predictions}")
+
+# Assuming best_clf is the trained model, Display graphical representation of the decision boundaries
+plot_decision_boundaries(X_test, y_test, best_clf)

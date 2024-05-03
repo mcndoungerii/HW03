@@ -4,7 +4,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 
 from utility import (load_malicious_benign_data,evaluate_decision_tree,max_depths, max_features_list,
-                     min_samples_splits,min_samples_leafs,max_leaf_nodes_list)
+                     min_samples_splits,min_samples_leafs,max_leaf_nodes_list,plot_graph_)
 
 data = load_malicious_benign_data()
 
@@ -55,3 +55,6 @@ print("Train Accuracy:", best_accuracy)
 train_predictions = best_clf.predict(X_train)
 test_predictions = best_clf.predict(X_test)
 print(f"Train Predictions: {train_predictions} \nTest Predictions: {test_predictions}")
+
+
+plot_graph_(X_train, y_train, best_hyperparameters, "URL_LENGTH", "Type")
