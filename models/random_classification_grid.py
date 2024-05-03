@@ -27,7 +27,6 @@ def evaluate_model(data, test_size):
     y_pred = best_clf.predict(X_test)
     test_accuracy = accuracy_score(y_test, y_pred)
     print("Best Model Hyperparameters:", grid_search.best_params_)
-    print("Test Accuracy:", test_accuracy)
 
     return test_accuracy
 
