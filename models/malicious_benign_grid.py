@@ -5,6 +5,7 @@ from sklearn.metrics import accuracy_score
 from utility import load_malicious_benign_data
 
 data = load_malicious_benign_data()
+print("Dataframe size:",data.size)
 
 # Split features and target variable
 X = data.drop(columns=['SERVER', 'WHOIS_COUNTRY', 'WHOIS_STATEPRO', 'NUMBER_SPECIAL_CHARACTERS', 'CHARSET',
