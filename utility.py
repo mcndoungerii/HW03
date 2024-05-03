@@ -4,13 +4,12 @@ from sklearn.model_selection import cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 
 # Train decision tree classifiers with different hyperparameters
-max_depths = [None, 5, 10]
-min_samples_splits = [2, 5, 10]
-min_samples_leafs = [1, 2, 4]
-max_leaf_nodes = [None, 5, 10]
-max_features = [None, 'sqrt', 'log2']
-best_accuracy = -1
-best_hyperparameters = {}
+max_depths: list = [None, 5, 10]
+min_samples_splits: list = [2, 5, 10]
+min_samples_leafs: list = [1, 2, 5]
+max_leaf_nodes_list: list = [None, 10, 20]
+max_features_list: list = [None, 'sqrt', 'log2']
+
 
 def load_malicious_benign_data():
 

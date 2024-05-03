@@ -3,7 +3,8 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 
-from utility import load_malicious_benign_data,evaluate_decision_tree
+from utility import (load_malicious_benign_data,evaluate_decision_tree,max_depths, max_features_list,
+                     min_samples_splits,min_samples_leafs,max_leaf_nodes_list)
 
 data = load_malicious_benign_data()
 
@@ -22,11 +23,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 best_accuracy = -1
 best_hyperparameters = {}
 
-for max_depth in [None, 5, 10]:
-    for min_samples_split in [2, 5, 10]:
-        for min_samples_leaf in [1, 2, 5]:
-            for max_leaf_nodes in [None, 10, 20]:
-                for max_features in [None, 'sqrt', 'log2']:
+
+for max_depth in max_depths:
+    for min_samples_split in min_samples_splits:
+        for min_samples_leaf in min_samples_leafs:
+            for max_leaf_nodes in max_leaf_nodes_list:
+                for max_features in max_features_list:
                     accuracy = evaluate_decision_tree(max_depth, min_samples_split, min_samples_leaf,
                                                       max_leaf_nodes, max_features, X_train, y_train)
 
@@ -50,3 +52,9 @@ test_accuracy = accuracy_score(y_test, y_pred)
 print("Best Model Hyperparameters:", best_hyperparameters)
 print("Test Accuracy:", test_accuracy)
 print("Train Accuracy:", best_accuracy)
+
+
+# Predictions
+train_predictions = best_clf.predict(X_train)
+test_predictions = best_clf.predict(X_test)
+print(f"Train Predictions: {train_predictions} \nTest Predictions: {test_predictions}")
