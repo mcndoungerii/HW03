@@ -14,7 +14,7 @@ max_leaf_nodes_list: list = [None, 10, 20]
 max_features_list: list = [None, 'sqrt', 'log2']
 
 
-def load_malicious_benign_data():
+def load_malicious_benign_data() -> pd.DataFrame:
 
     # Load the dataset
     df = pd.read_csv("../data/dataset_Malicious_and_Benign_Websites.csv")
